@@ -36,5 +36,12 @@ const luigi = () => {
 const sabrina = document.querySelector(".marco");
 sabrina.addEventListener("change", luigi);
 
-
-
+const imagina = document.querySelector("#img");
+trova = () => {
+  fetch("https://dog.ceo/api/breeds/image/random")
+    .then((result) => result.json())
+    .then((data) => {
+      img.src = data.message;
+    });
+};
+trova();
