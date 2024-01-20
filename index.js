@@ -43,13 +43,18 @@ const ricerca = () => {
 };
 
 const mostraNome = (users) => {
-  let datis = users.map((user) => {
-    return `
+  let datis;
+  if (users.length === 0) {
+    imagina.innerHTML = `<p class="fs-1 m-5">Nessun risultato trovato</p>`;
+  } else {
+    datis = users.map((user) => {
+      return `
     <li>
       <h5>${user.name}</h5>
     </li>
     `;
-  });
+    });
+  }
 
   imagina.innerHTML = datis.join("");
 };
@@ -70,13 +75,18 @@ const ricercac = () => {
 };
 
 const mostraCognome = (users) => {
-  let datis = users.map((user) => {
-    return `
+  let datis;
+  if (users.length === 0) {
+    imagina.innerHTML = `<p class="fs-1 m-5">Nessun risultato trovato</p>`;
+  } else {
+    datis = users.map((user) => {
+      return `
       <li>
         <h5>${user.username}</h5>
       </li>
       `;
-  });
+    });
+  }
 
   imagina.innerHTML = datis.join("");
 };
@@ -97,18 +107,21 @@ const ric = () => {
 };
 
 const mostraWebb = (users) => {
-  let datis = users.map((user) => {
-    return `
+  let datis;
+  if (users.length === 0) {
+    imagina.innerHTML =
+      imagina.innerHTML = `<p class="fs-1 m-5">Nessun risultato trovato</p>`;
+  } else {
+    datis = users.map((user) => {
+      return `
       <li>
         <h5>${user.website}</h5>
       </li>
       `;
-  });
-
+    });
+  }
   imagina.innerHTML = datis.join("");
 };
-
-//email
 
 const rice = () => {
   const cerEmail = document.querySelector(".escribes").value.toLowerCase();
@@ -124,27 +137,31 @@ const rice = () => {
 };
 
 const mostraEmail = (users) => {
-  let datis = users.map((user) => {
-    return `
-      <li>
-        <h5>${user.email}</h5>
-      </li>
-      `;
-  });
-
+  let datis;
+  if (users.length === 0) {
+    imagina.innerHTML = `<p class="fs-1 m-5">Nessun risultato trovato</p>`;
+  } else {
+    datis = users.map((user) => {
+      return `
+        <li>
+          <h5>${user.email}</h5>
+        </li>
+        `;
+    });
+  }
   imagina.innerHTML = datis.join("");
 };
 
-const finden = document.querySelector(".boton");
-finden.addEventListener("click", ricerca);
+const finden = document.querySelector("#trovaNome");
+finden.addEventListener("change", ricerca);
 
-const busca = document.querySelector(".busca");
-busca.addEventListener("click", ricercac);
+const busca = document.querySelector("#trovaCognome");
+busca.addEventListener("change", ricercac);
 
-const trov = document.querySelector(".boto");
-trov.addEventListener("click", rice);
+const trov = document.querySelector("#trovaWeb");
+trov.addEventListener("change", ric);
 
-const trovaEmail = document.querySelector(".botone");
-trovaEmail.addEventListener("click", rice);
+const trovaEmail = document.querySelector("#trovaEmail");
+trovaEmail.addEventListener("change", rice);
 
 getName();
