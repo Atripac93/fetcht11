@@ -1,50 +1,122 @@
-const mostraTarget = function () {
-  console.log(mostraTarget.value);
-};
+const imagina = document.querySelector("#lista");
+let usersData = [];
 
-const button = document.querySelector(".cicc");
-button.addEventListener("change", mostraTarget);
+const getName = async () => {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const dataJson = await response.json();
 
-const dammiValore = function () {
-  const valor = document.querySelector(".valu");
-  return valor.value;
-};
-const addTask = function () {
-  const list = document.querySelector(".addTask");
-  list.innerText += `<li> ${dammiValore()} </li>`;
-};
-const input = document.querySelector(".valu");
-input.addEventListener("change", addTask);
-//
-const carlo = () => {
-  let fabio = document.querySelector(".marco");
-  console.log(fabio.value);
-  fabio.value = "";
-};
-const concetta = document.querySelector(".fulvio");
-concetta.addEventListener("click", carlo);
+    console.log(dataJson);
 
-const mirko = () => {
-  const salvatore = document.querySelector(".marco");
-  return salvatore.value;
-};
+    usersData = dataJson;
 
-const luigi = () => {
-  const micio = document.querySelector(".andrea");
-  micio.innerHTML += `<li>${mirko()}</li>`;
-};
-const sabrina = document.querySelector(".marco");
-sabrina.addEventListener("change", luigi);
-
-const imagina = document.querySelector("#img");
-trova = () => {
-  fetch("https://dog.ceo/api/breeds/image/random")
-    .then((result) => result.json())
-    .then((data) => {
-      img.src = data.message;
+    const datis = dataJson.map((user) => {
+      return `
+      <li>
+        <h5>${user.name}</h5>
+        <h5>${user.username}</h5>
+        <h5>${user.website}</h5>
+        <h5>${user.email}</h5>
+      </li>
+      `;
     });
+
+    imagina.innerHTML = datis.join("");
+  } catch (error) {
+    console.error("Errore", error);
+  }
 };
-trova();
 
+//nome
 
+const ricerca = () => {
+  const searchUsers = document.querySelector(".scrivi").value.toLowerCase();
+  if (searchUsers === "") {
+    alert("inserisci un nome");
+    return;
+  }
+  const filtraUtenti = usersData.filter((user) =>
+    user.name.toLowerCase().includes(searchUsers)
+  );
+  mostraNome(filtraUtenti);
+  document.getElementById("trovaNome").value = "";
+};
 
+const mostraNome = (users) => {
+  let datis = users.map((user) => {
+    return `
+    <li>
+      <h5>${user.name}</h5>
+    </li>
+    `;
+  });
+
+  imagina.innerHTML = datis.join("");
+};
+
+//cognome
+
+const ricercac = () => {
+  const cercaUsers = document.querySelector(".schreib").value.toLowerCase();
+  if (cercaUsers === "") {
+    alert("inserisci un cognome");
+    return;
+  }
+  const filterUtenti = usersData.filter((user) =>
+    user.username.toLowerCase().includes(cercaUsers)
+  );
+  mostraCognome(filterUtenti);
+  document.getElementById("trovaCognome").value = "";
+};
+
+const mostraCognome = (users) => {
+  let datis = users.map((user) => {
+    return `
+      <li>
+        <h5>${user.username}</h5>
+      </li>
+      `;
+  });
+
+  imagina.innerHTML = datis.join("");
+};
+
+//website
+
+const ric = () => {
+  const cerWebb = document.querySelector(".ecrit").value.toLowerCase();
+  if (cerWebb === "") {
+    alert("inserisci un sito web");
+    return;
+  }
+  const filterUt = usersData.filter((user) =>
+    user.website.toLowerCase().includes(cerWebb)
+  );
+  mostraWebb(filterUt);
+  document.getElementById("trovaCognome").value = "";
+};
+
+const mostraWebb = (users) => {
+  let datis = users.map((user) => {
+    return `
+      <li>
+        <h5>${user.website}</h5>
+      </li>
+      `;
+  });
+
+  imagina.innerHTML = datis.join("");
+};
+
+//email
+
+const finden = document.querySelector(".boton");
+finden.addEventListener("click", ricerca);
+
+const busca = document.querySelector(".busca");
+busca.addEventListener("click", ricercac);
+
+const trov = document.querySelector(".boto");
+trov.addEventListener("click", ric);
+
+getName();
