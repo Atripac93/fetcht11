@@ -6,14 +6,14 @@ const getName = async () => {
     const response = await fetch("https://jsonplaceholder.typicode.com/users");
     const dataJson = await response.json();
 
-    console.log(dataJson);
+    console.log("Dati", dataJson);
 
     usersData = dataJson;
 
     const datis = dataJson.map((user) => {
       return `
       <li class="m-5 d-flex flex-column gap-4">
-        <h5">${user.name}</h5>
+        <h5>${user.name}</h5>
         <h5>${user.username}</h5>
         <h5>${user.website}</h5>
         <h5>${user.email}</h5>
