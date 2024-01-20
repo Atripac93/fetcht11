@@ -12,8 +12,8 @@ const getName = async () => {
 
     const datis = dataJson.map((user) => {
       return `
-      <li>
-        <h5>${user.name}</h5>
+      <li class="m-5 d-flex flex-column gap-4">
+        <h5">${user.name}</h5>
         <h5>${user.username}</h5>
         <h5>${user.website}</h5>
         <h5>${user.email}</h5>
@@ -110,6 +110,31 @@ const mostraWebb = (users) => {
 
 //email
 
+const rice = () => {
+  const cerEmail = document.querySelector(".escribes").value.toLowerCase();
+  if (cerEmail === "") {
+    alert("inserisci una Email");
+    return;
+  }
+  const filterEmail = usersData.filter((user) =>
+    user.email.toLowerCase().includes(cerEmail)
+  );
+  mostraEmail(filterEmail);
+  document.getElementById("trovaEmail").value = "";
+};
+
+const mostraEmail = (users) => {
+  let datis = users.map((user) => {
+    return `
+      <li>
+        <h5>${user.email}</h5>
+      </li>
+      `;
+  });
+
+  imagina.innerHTML = datis.join("");
+};
+
 const finden = document.querySelector(".boton");
 finden.addEventListener("click", ricerca);
 
@@ -117,6 +142,9 @@ const busca = document.querySelector(".busca");
 busca.addEventListener("click", ricercac);
 
 const trov = document.querySelector(".boto");
-trov.addEventListener("click", ric);
+trov.addEventListener("click", rice);
+
+const trovaEmail = document.querySelector(".botone");
+trovaEmail.addEventListener("click", rice);
 
 getName();
